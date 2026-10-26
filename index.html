@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>Diego Cuevas Vega</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Diego Cuevas Vega: electrical engineering and economics at Harvard. Embedded systems and robotics for ecological restoration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: a da Vinci codex. Hero spread → project index with a live plate → timeline spine → letter-style About → colophon. */
+:root{
+  color-scheme: light;
+  --paper:#f2ebdc;      /* page */
+  --paper-deep:#e6dcc6; /* plates, insets */
+  --ink:#2f2118;        /* sepia ink, text */
+  --ink-soft:#6a5544;   /* secondary text */
+  --rule:#bba98c;       /* dashed rules, grid */
+  --chalk:#a3412a;      /* red chalk accent */
+  --serif:'EB Garamond',Garamond,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --hand:'Caveat','Segoe Print','Bradley Hand',cursive;
+  --gut:max(16px,env(safe-area-inset-left,0px));
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+/* paper grain + faint construction grid, fixed behind everything */
+.paper{display:none}
+main,header,footer{position:relative;z-index:1}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gut);padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media(min-width:900px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--chalk);outline-offset:3px}
+.rough{filter:url(#rough)}
+.mono{font-family:var(--mono)}
+.hand{font-family:var(--hand);color:var(--chalk)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+h1,h2,h3{font-weight:500;text-wrap:balance;margin:0}
+p{margin:0}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(3px)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px 0}
+.top .wrap + .wrap{display:block;padding-block:0 6px}
+.name{font-size:21px;font-weight:500;text-decoration:none;letter-spacing:.01em}
+.nav{display:flex;gap:28px;font-family:var(--mono);font-size:12.5px;letter-spacing:.14em}
+.nav a{text-decoration:none;position:relative;padding-block:4px}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1.5px;background:var(--chalk);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.nav a:hover::after{transform:scaleX(1)}
+.nav .cv{color:var(--chalk)}
+.top svg{display:block;width:100%;height:8px}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:40px;align-items:stretch;padding-block:28px 24px}
+.hero h1{font-size:clamp(40px,5.6vw,66px);line-height:1;letter-spacing:-.012em;margin:14px 0 18px}
+.hero h1 em{color:var(--chalk);font-weight:400}
+.lede{font-size:20px;color:var(--ink-soft);max-width:30em}
+.spec{margin-top:28px;font-family:var(--mono);font-size:12.5px;max-width:420px}
+.spec div{display:flex;justify-content:space-between;gap:16px;padding:7px 1px;border-bottom:1px dashed var(--rule)}
+.spec dt{color:var(--ink-soft)}.spec dd{margin:0;text-align:right}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;max-width:420px;justify-content:center}
+.btn{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-decoration:none;padding:11px 16px;border:1.4px solid var(--ink);display:inline-flex;gap:8px;align-items:center;background:transparent;color:var(--ink);cursor:pointer}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn:hover{background:var(--chalk);border-color:var(--chalk);color:var(--paper)}
+.portrait{margin:0;justify-self:center;align-self:stretch;display:flex;width:min(100%,460px);padding:10px;background:var(--paper);border:3px solid #6b4a2f;box-shadow:0 0 0 6px var(--paper),0 0 0 7.5px #6b4a2f}
+.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.fig{position:relative;margin:0}
+.fig .swap{position:relative;aspect-ratio:928/706;max-width:100%}
+.fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s}
+.fig img.sk{mix-blend-mode:multiply;-webkit-mask-image:radial-gradient(ellipse 62% 60% at 50% 50%,#000 35%,rgba(0,0,0,.6) 62%,transparent 100%);mask-image:radial-gradient(ellipse 62% 60% at 50% 50%,#000 35%,rgba(0,0,0,.6) 62%,transparent 100%)}
+.fig img.real{opacity:0;border-radius:2px}
+.fig:hover img.real{opacity:1}
+.fig:hover svg.ann{opacity:0}
+.fig svg.ann{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transition:opacity .4s}
+.fig figcaption{font-style:italic;font-size:14px;color:var(--ink-soft);text-align:center;margin-top:22px}
+
+/* ---------- section heads ---------- */
+section{padding-block:56px 24px}
+.sh{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin-bottom:26px}
+.sh h2{font-size:clamp(32px,4vw,42px)}
+.sh .hand{font-size:24px}
+
+/* ---------- projects: codex index + live plate ---------- */
+.codex{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:start}
+.toc{list-style:none;margin:0;padding:0;border-top:1.4px solid var(--ink)}
+.toc li{border-bottom:1px dashed var(--rule)}
+.toc button{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;padding:14px 4px}
+.toc .no{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.toc .t{font-size:23px;line-height:1.2;transition:color .2s}
+.toc .yr{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.toc .tags{grid-column:2/4;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-soft)}
+.toc .thumb{display:none}
+.toc li.on .t,.toc button:hover .t{color:var(--chalk)}
+.toc li.on .no{color:var(--chalk)}
+.toc li.on .no::before{content:"→ "}
+.plate-wrap{position:sticky;top:96px}
+.plate{position:relative;cursor:pointer}
+.plate .frame{position:absolute;inset:-7px;border:1.4px solid var(--ink);pointer-events:none}
+.plate .ph{position:relative;aspect-ratio:4/3;max-width:100%;overflow:hidden;background:var(--paper-deep)}
+.plate .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .55s}
+.plate .ph img.sk{mix-blend-mode:multiply}
+.plate .ph img.real{opacity:0}
+.plate:hover .ph img.real{opacity:1}
+.plate .empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px}
+.plate .empty svg{width:56%;max-width:260px;height:auto;opacity:.55}
+.plate .empty p{font-family:var(--hand);font-size:24px;color:var(--ink-soft);margin-top:6px}
+.tb{display:grid;grid-template-columns:auto minmax(0,1fr) auto;border-top:1.4px solid var(--ink);font-family:var(--mono);font-size:11px}
+.tb>div{padding:9px 12px;border-right:1px solid var(--rule)}.tb>div:last-child{border:0}
+.tb small{display:block;font-size:9px;letter-spacing:.12em;color:var(--ink-soft)}
+.tb .ttl{font-family:var(--serif);font-size:19px;line-height:1.2}
+.plate-note{margin-top:20px;font-size:17px;color:var(--ink-soft);min-height:3.2em}
+.plate-actions{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px;flex-wrap:wrap}
+.plate-actions .hand{font-size:20px;color:var(--ink-soft)}
+
+/* ---------- leadership: ink spine timeline ---------- */
+.legend{display:flex;gap:22px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-soft);margin:-10px 0 26px}
+.legend span{display:inline-flex;gap:8px;align-items:center}
+.dot{width:12px;height:12px;border-radius:50%;border:1.6px solid var(--ink);display:inline-block;background:var(--paper)}
+.dot.fill{background:var(--ink)}
+.spine{position:relative;display:grid;gap:8px;padding-block:6px}
+.spine::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:1.6px;background:var(--ink);filter:url(#rough)}
+.entry{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);align-items:start}
+.entry .node{grid-column:2;justify-self:center;margin-top:9px;position:relative;z-index:1}
+.entry .card{grid-column:1;text-align:right;padding-right:6px}
+.entry.R .card{grid-column:3;text-align:left;padding-right:0;padding-left:6px}
+.entry.R .node{grid-row:1}
+.diamond{width:11px;height:11px;transform:rotate(45deg);background:var(--chalk);border:1.6px solid var(--chalk);display:inline-block}
+.entry.proj .node{margin-top:7px}
+.entry.proj .card{padding-bottom:14px}
+.entry.proj button{all:unset;cursor:pointer;display:inline-flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}
+.entry.proj.L button{justify-content:flex-end}
+.entry.proj .pn{font-family:var(--mono);font-size:11.5px;color:var(--chalk)}
+.entry.proj .pt{font-size:19px;font-style:italic;border-bottom:1px dashed var(--rule)}
+.entry.proj button:hover .pt{color:var(--chalk);border-color:var(--chalk)}
+.entry.proj .pw{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.entry .when{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--chalk)}
+.entry h3{font-size:22px;line-height:1.2;margin-top:2px}
+.entry .org{font-style:italic;color:var(--ink-soft);font-size:17px}
+.entry ul{list-style:none;padding:0;margin:8px 0 18px;font-size:16.5px;color:var(--ink)}
+.entry li{margin-top:4px}
+
+/* ---------- about: a letter ---------- */
+.letter{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:56px;align-items:start}
+.medallion{margin:0;position:relative}
+.medallion .oval{position:relative;aspect-ratio:3/4;max-width:100%;overflow:hidden;border:1.6px solid var(--ink);box-shadow:0 0 0 7px var(--paper),0 0 0 8.4px var(--ink)}
+.medallion .corners{position:absolute;inset:-16px;pointer-events:none;width:calc(100% + 32px);height:calc(100% + 32px)}
+.medallion img{width:100%;height:100%;object-fit:cover;filter:sepia(.55) contrast(1.02) saturate(.8)}
+.medallion figcaption{font-family:var(--hand);font-size:21px;color:var(--ink-soft);text-align:center;margin-top:18px}
+.bio p{max-width:34em;margin-bottom:16px;font-size:19px}
+.bio p:first-child::first-letter{font-size:3.4em;float:left;line-height:.82;padding:6px 10px 0 0;color:var(--chalk)}
+.sub-h{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:34px 0 12px}
+.bio{container-type:inline-size}
+.langs{list-style:none;padding:0;margin:0;display:flex;flex-wrap:nowrap;align-items:baseline;gap:0;white-space:nowrap;font-size:min(21px,3.2cqi)}
+.langs li{display:flex;align-items:baseline;gap:.4em}
+.langs li+li::before{content:"·";color:var(--rule);margin:0 .55em}
+.langs .nm{font-size:1em}
+.langs .lv{font-family:var(--hand);font-size:1em;color:var(--chalk)}
+.honors-plate{max-width:900px;margin:72px auto 0;text-align:center}
+.honors-h{position:relative}
+.honors-h{font-size:clamp(32px,4vw,42px);letter-spacing:.02em;margin-bottom:24px}
+.honors-t{width:100%;border-collapse:collapse;border-top:3px double var(--ink);border-bottom:3px double var(--ink)}
+.honors-t td{padding:20px 14px;border-bottom:1px dashed var(--rule);vertical-align:baseline;font-size:clamp(19px,2.2vw,24px);line-height:1.35}
+.honors-t tr:last-child td{border-bottom:0}
+.honors-t td.y{width:96px;font-family:var(--mono);font-size:15px;color:var(--chalk);border-right:1px solid var(--rule);text-align:center}
+.honors-t td span{display:block;font-style:italic;font-size:clamp(16px,1.7vw,19px);color:var(--ink-soft);margin-top:2px}
+
+/* ---------- colophon ---------- */
+.colophon{padding-block:64px 48px}
+.colophon .wrap{display:block;border-top:1px dashed var(--rule);padding-top:28px}
+.colophon h2{font-size:clamp(34px,4.6vw,52px);line-height:1.05}
+.contact{display:grid;gap:8px;font-family:var(--mono);font-size:13px}
+.contact .row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.contact .addr{user-select:all;border-bottom:1px dashed var(--rule)}
+.copy{all:unset;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--chalk)}
+.links{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px}
+.links a{text-decoration:none;border-bottom:1px solid var(--ink)}
+.sig{font-family:var(--hand);font-size:44px;color:var(--ink);transform:rotate(-4deg);line-height:1}
+.fine{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:36px;letter-spacing:.06em}
+
+/* ---------- folio sheet (project detail) ---------- */
+.sheet{position:fixed;inset:0;z-index:40;background:var(--paper);display:block}
+.sheet[hidden]{display:none!important}
+.sheet .pg{position:relative;width:100%;height:100%;overflow-y:auto;background:var(--paper);
+  display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:0 56px;align-items:start;
+  padding-top:calc(env(safe-area-inset-top,0px) + 22px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 40px);
+  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));animation:slide .35s ease-out}
+@media(min-width:700px){.sheet .pg{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+@keyframes slide{from{opacity:0}to{opacity:1}}
+/* folio index: a quiet sticky sidebar with a single ink rule */
+.scroll{position:sticky;top:0;z-index:4;align-self:start;margin-top:22px;padding-right:18px;border-right:1px solid var(--rule)}
+.scroll-body{padding:0}
+.scroll h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink-soft);margin:0 0 8px;font-weight:500}
+.scroll ol{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:0}
+.scroll button{all:unset;cursor:pointer;display:grid;grid-template-columns:34px minmax(0,1fr);gap:4px;padding:4px 0 4px 10px;margin-left:-10px;border-left:2px solid transparent;font-size:13.5px;line-height:1.25;width:100%;box-sizing:border-box;transition:color .15s,border-color .15s}
+.scroll button .n{font-family:var(--mono);font-size:9.5px;color:var(--ink-soft);padding-top:2px}
+.scroll button:hover,.scroll button.on{color:var(--chalk)}
+.scroll button.on .n{color:var(--chalk)}
+.scroll button.on{border-left-color:var(--chalk)}
+.scroll ol.folios{display:none}
+.scroll .secs button{grid-template-columns:12px minmax(0,1fr);font-size:13px}
+.scroll .secs button::before{content:"";width:6px;height:1px;background:var(--rule);align-self:center}
+/* gear selector: projects ride the rim of a cog; the one in line with the notch is magnified */
+.gear{position:relative;height:180px;margin:6px 0 28px;z-index:5;clip-path:inset(-300px -600px -300px 0)}
+.gear .veil{position:absolute;left:0;top:-230px;width:520px;height:640px;pointer-events:none;opacity:0;transition:opacity .35s;
+  background:radial-gradient(ellipse 400px 300px at 0 50%,var(--paper) 80%,rgba(242,235,220,0) 100%)}
+.gear.open .veil{opacity:1}
+.gear::before{content:"";position:absolute;left:0;top:-10px;width:170px;height:200px}
+.gear.open::before{top:-230px;width:520px;height:640px}
+.gear .cog{position:absolute;width:128px;height:128px;left:-64px;top:26px;transform-origin:50% 50%;transition:transform .6s cubic-bezier(.3,.7,.3,1)}
+.gear .notch{position:absolute;left:68px;width:0;top:90px;height:0;transition:left .6s cubic-bezier(.3,.7,.3,1)}
+.gear .notch::before{content:"";position:absolute;left:-8px;top:-5px;border:5px solid transparent;border-left:7px solid var(--chalk)}
+.gear .dial{list-style:none;margin:0;padding:0}
+.gear .dial li{position:absolute;left:0;top:0;transform-origin:0 50%;transition:transform .75s cubic-bezier(.3,.7,.3,1),opacity .35s;opacity:0;pointer-events:none}
+.gear.open .dial li{opacity:var(--o);pointer-events:auto}
+.gear .dial li[data-far]{pointer-events:none!important}
+.gear .dial button{all:unset;cursor:pointer;display:flex;align-items:baseline;gap:6px;white-space:nowrap;font-size:13.5px;line-height:1;padding:3px 0}
+.gear .dial .n{font-family:var(--mono);font-size:9.5px;color:var(--ink-soft)}
+.gear .dial button:hover{color:var(--chalk)}
+.gear .dial li.on button{color:var(--chalk)}
+.gear .dial li.on .n{color:var(--chalk)}
+.scroll .back{all:unset;cursor:pointer;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--chalk);display:inline-block;margin-top:4px}
+.leaf{min-width:0;max-width:860px}
+.pg .close{position:fixed;top:calc(env(safe-area-inset-top,0px) + 18px);right:max(18px,env(safe-area-inset-right,0px));z-index:6;background:var(--paper)}
+.pg .eyebrow{margin-top:8px}
+.pg h2{font-size:clamp(34px,5vw,50px);line-height:1.05;margin:10px 0 8px}
+.pg .meta{font-family:var(--mono);font-size:12px;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:24px}
+.pg .hero-img{position:relative;aspect-ratio:4/3;max-width:100%;border:1.4px solid var(--ink);overflow:hidden;background:var(--paper-deep);margin-bottom:8px}
+.pg .hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pg .hero-img.vid{aspect-ratio:16/9;background:#000}
+.pg .hero-img video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.pg .f2 video{display:block;width:100%;height:auto}
+.pg .f2 video.tall{width:auto;max-width:100%;max-height:640px;margin:0 auto;background:var(--paper-deep)}
+.pg .f2:has(video.tall){justify-self:center;max-width:380px}
+.pg .f2:has(video) .fr{aspect-ratio:auto}
+.pg .hero-img img.real{opacity:0;transition:opacity .5s}
+.pg .hero-img:hover img.real{opacity:1}
+.pg .cap{font-style:italic;font-size:14px;color:var(--ink-soft);margin-bottom:30px}
+.pg .blk{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 28px;padding-block:20px;border-top:1px dashed var(--rule)}
+.pg .blk h3{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);padding-top:5px}
+.pg .blk p,.pg .blk li{font-size:18.5px}
+.pg .blk ul,.pg .blk ol{margin:0;padding-left:20px}
+.pg .blk p + p,.pg .blk p + ol,.pg .blk ol + p,.pg .blk p + ul,.pg .blk ul + p,.pg .blk p + .tbl,.pg .blk .tbl + p{margin-top:12px}
+.pg .blk li + li{margin-top:4px}
+.pg .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:22px}
+.pg .f2{margin:0}
+.pg .f2:only-child{max-width:520px}
+.pg .f2 .fr{position:relative;aspect-ratio:4/3;max-width:100%;border:1.2px solid var(--ink);overflow:hidden;background:var(--paper-deep)}
+.pg .f2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pg .f2 img.real{opacity:0;transition:opacity .5s}
+.pg .f2.swap2:hover img.real{opacity:1}
+.pg .f2:not(.swap2) .fr{aspect-ratio:auto}
+.pg .f2:not(.swap2) img{position:static;height:auto;display:block}
+.pg .figs{align-items:start}
+.pg .f2 figcaption{font-style:italic;font-size:14px;color:var(--ink-soft);margin-top:6px}
+.pg .tbl{overflow-x:auto;margin-top:18px}
+.pg table.data{border-collapse:collapse;width:100%;font-size:16.5px;border-top:1.4px solid var(--ink);border-bottom:1.4px solid var(--ink);font-variant-numeric:tabular-nums}
+.pg table.data th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;text-align:left;padding:10px 12px 8px;border-bottom:1px solid var(--rule)}
+.pg table.data td{padding:9px 12px;border-bottom:1px dashed var(--rule)}
+.pg table.data tr:last-child td{border-bottom:0}
+.pg table.data td.num{text-align:right;font-family:var(--mono);font-size:14px}
+.pg table.data th.num{text-align:right}
+.pg table.data tr.best td{color:var(--chalk)}
+.pg .blk p.fn{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:8px}
+.pg .blk .todo{font-family:var(--hand);font-size:22px;color:var(--ink-soft)}
+.pg .nums{display:flex;flex-wrap:wrap;gap:20px 36px}
+.pg .nums b{display:block;font-size:34px;font-weight:500;line-height:1}
+.pg .nums span{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.06em}
+.pg .pager{display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap}
+
+/* ---------- responsive ---------- */
+@media(max-width:880px){
+  body{font-size:17px}
+  .hero{grid-template-columns:minmax(0,1fr);gap:26px;padding-top:18px}
+  .fig,.portrait{order:-1}
+  .portrait{width:min(100%,320px);align-self:start}
+  .portrait img{height:auto}
+  .hero-cta{max-width:none}
+  .codex{grid-template-columns:minmax(0,1fr)}
+  .plate-wrap{display:none}
+  .toc button{grid-template-columns:92px minmax(0,1fr);grid-template-rows:auto auto auto}
+  .toc .thumb{display:block;grid-row:1/4;aspect-ratio:1;width:92px;max-width:100%;object-fit:cover;border:1.2px solid var(--ink);mix-blend-mode:multiply;align-self:start}
+  .toc .no{grid-column:2}.toc .t{grid-column:2;font-size:21px}.toc .yr{display:none}.toc .tags{grid-column:2}
+  .spine::before{left:7px}
+  .entry,.entry.R{grid-template-columns:16px minmax(0,1fr);gap:0 16px}
+  .entry .node,.entry.R .node{grid-column:1;grid-row:1;justify-self:start;margin-top:6px}
+  .entry .card,.entry.R .card{grid-column:2;grid-row:1;text-align:left;padding:0}
+  .entry.proj.L button{justify-content:flex-start}
+  .letter{grid-template-columns:minmax(0,1fr);gap:30px}
+  .medallion{max-width:240px;margin-inline:auto}
+  .colophon .wrap{grid-template-columns:minmax(0,1fr)}
+  .pg .blk{grid-template-columns:minmax(0,1fr)}
+  .sheet .pg{display:block}
+  .scroll{position:relative;margin:56px 0 24px;padding:0 0 14px;border-right:0;border-bottom:1px solid var(--rule)}
+  .gear{display:none}
+  .scroll ol.folios{display:flex!important;flex-wrap:wrap;gap:4px 14px}
+  .scroll ol.folios button{display:inline-flex;width:auto;grid-template-columns:none;font-size:14px}
+  .scroll ol.folios button .t{display:none}
+  .scroll .secs{display:none}
+}
+@media(max-width:560px){
+  .nav{gap:14px;font-size:11px;letter-spacing:.08em}
+  .name{font-size:18px}
+}
+@media(max-width:420px){.nav a:not(.cv):not([href="#projects"]){display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter>
+  <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#a3412a" stroke-width="1.6" stroke-linecap="round"/></marker>
+  <marker id="tick" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M5 0 L5 10" stroke="#2f2118" stroke-width="1.4"/></marker>
+</defs></svg>
+<div class="paper" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="#top">Diego Cuevas Vega</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#projects">PROJECTS</a>
+      <a href="#about">ABOUT</a>
+      <a href="#leadership">LEADERSHIP</a>
+      <a class="cv" href="cv.pdf" target="_blank" rel="noopener">CV ↓</a>
+    </nav>
+  </div>
+  <div class="wrap"><svg class="rough" viewBox="0 0 1000 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2 4 C 200 2.5, 420 5.5, 600 3.5 S 880 5, 998 4" stroke="#2f2118" stroke-width="1.6" fill="none"/></svg></div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow">Electrical Engineering &amp; Economics @ Harvard</div>
+      <h1>Electronics for robots that <em>work the land.</em></h1>
+      <p class="lede">I design embedded systems and mechatronics for ecological restoration and humanitarian technology, from firmware to field tests.</p>
+      <dl class="spec">
+        <div><dt>FOCUS</dt><dd>Embedded systems · Robotics</dd></div>
+        <div><dt>STACK</dt><dd>ROS2 · ESP32 · C/C++ · Python</dd></div>
+        <div><dt>CAD</dt><dd>SOLIDWORKS (CSWA) · Fusion 360</dd></div>
+        <div><dt>PUBLISHED</dt><dd>IEEE GHTC 2026</dd></div>
+      </dl>
+      <div class="hero-cta">
+        <a class="btn solid" href="#projects">SEE THE PROJECTS</a>
+        <a class="btn" href="cv.pdf" target="_blank" rel="noopener">DOWNLOAD CV</a>
+      </div>
+    </div>
+    <figure class="portrait"><img src="assets/headshot.jpg" alt="Diego Cuevas Vega"></figure>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sh"><h2>Projects</h2><span class="hand">devices I've built, designed, and (always) re-designed</span></div>
+      <div class="codex">
+        <ol class="toc" id="toc"></ol>
+        <div class="plate-wrap" aria-live="polite">
+          <div class="plate" id="plate" role="button" tabindex="0" aria-label="Open project">
+            <div class="frame rough"></div>
+            <div class="ph" id="plate-ph"></div>
+            <div class="tb"><div><small>FOLIO</small><span id="plate-no">P-01</span></div><div class="ttl" id="plate-t"></div><div><small>YEAR</small><span id="plate-yr"></span></div></div>
+          </div>
+          <p class="plate-note" id="plate-note"></p>
+          <div class="plate-actions"><span class="hand">hover the plate to see the real build</span><button class="btn" id="plate-open" type="button">OPEN FOLIO →</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section id="leadership">
+    <div class="wrap">
+      <div class="sh"><h2>Experience &amp; Leadership</h2><span class="hand">in the order it happened</span></div>
+      <div class="legend"><span><i class="dot fill"></i>Research &amp; teaching</span><span><i class="dot"></i>Leadership</span><span><i class="diamond" style="width:9px;height:9px"></i>Project</span></div>
+      <div class="spine" id="spine"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sh"><h2>About</h2><span class="hand">a short letter</span></div>
+      <div class="letter">
+        <figure class="medallion">
+          <div style="position:relative"><div class="oval"><img src="assets/ghtc-talk.jpg" alt="Diego presenting his research at IEEE GHTC 2026"></div><svg class="corners rough" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 9 L0 0 L9 0 M91 0 L100 0 L100 9 M100 91 L100 100 L91 100 M9 100 L0 100 L0 91" fill="none" stroke="#a3412a" stroke-width=".9" vector-effect="non-scaling-stroke" style="stroke-width:1.6px"/></svg></div>
+          <figcaption>presenting at IEEE GHTC, 2026</figcaption>
+        </figure>
+        <div class="bio">
+          <p>I grew up in Mexico City and came to Harvard to study electrical engineering, with a secondary field in economics. I like building things and solving problems that require applying theory to the real world, where the hardware has to survive mud, rain, tight enclosures and tight budgets.</p>
+          <p>Most of my work sits where electronics meet mechanisms. I write the firmware, design the parts in CAD, and machine or print them myself. Then I take them into the field to see what needs to be improved. I'm drawn to deep tech, sustainability and humanitarian technology, and to tools that work for the places that need them most.</p>
+          <p>Outside the lab I direct PRIMEX, a free mentorship program for Mexican students applying to US universities.</p>
+
+          <div class="sub-h">Languages</div>
+          <ul class="langs">
+            <li><span class="nm">Spanish</span></li>
+            <li><span class="nm">English</span></li>
+            <li><span class="nm">French</span><span class="lv">proficient</span></li>
+            <li><span class="nm">German</span><span class="lv">upper-intermediate</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="honors-plate">
+        <h3 class="honors-h">Honors</h3>
+        <table class="honors-t">
+          <tbody>
+            <tr><td class="y">2026</td><td>Jacob Wendell Scholarship Prize invitee<span>among the top first-year academic records at Harvard College</span></td></tr>
+            <tr><td class="y">2025</td><td>Gold Medal, International Economics Olympiad<span>the first Mexican gold medalist</span></td></tr>
+            <tr><td class="y">2024</td><td>Gold and Bronze Medals, Mexican Mathematical Olympiad<span>national championships, two editions</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon">
+  <div class="wrap">
+    <div>
+      <div class="contact">
+        <div class="row"><span class="addr" id="email">diego_cuevasvega@college.harvard.edu</span><button class="copy" id="copy" type="button">COPY</button></div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/diego-cuevas-vega-5471a5378" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/Dicuve06" target="_blank" rel="noopener">GitHub</a>
+          <a href="cv.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+        </div>
+      </div>
+      <p class="fine">Built by Diego Cuevas Vega · Cambridge, MA · 2026</p>
+    </div>
+  </div>
+</footer>
+
+<!-- project folio sheet -->
+<div class="sheet" id="sheet" hidden>
+  <article class="pg" id="pg" role="dialog" aria-modal="true" aria-labelledby="pg-title" tabindex="-1"></article>
+</div>
+
+<script>
+/* ---------- content ---------- */
+const PROJECTS = [
+  { id:"p01", no:"P-01", title:"Vertical End-Effector", year:"2026", tags:"Mechatronics · Embedded · ROS2 · Field robotics",
+    sk:"assets/vertical-sketch.jpg", real:"assets/vertical-tiller.jpg",
+    note:"I developed a modular, vertically actuated end-effector for the Segway RMP 440LE V3 that supports interchangeable tilling and plowing tools, and validated it by constructing a full-scale demi-lune berm in a field trial in Hadley, Massachusetts.",
+    context:"Harvard PRISE research fellowship, Digital Fabrication Lab · Jun to Aug 2026 · Segway RMP 440LE V3",
+    problem:"Building on the angle-modulated design, the goal was to take berm construction from the test bed to real farmland on a larger, field-capable rover. The tool still had to be low-cost and modular, and it had to handle the higher loads of tilling and shaping full-size berms outdoors.",
+    build:"The end-effector is built on an aluminum extrusion frame, selected for its modularity: a common mounting interface allows the system to switch between a rotary tiller and a plow blade. I machined the extrusion to length on a horizontal bandsaw. A linear actuator couples to the active tool and controls its vertical position. Compared with the angle-modulated Jackal design, this architecture trades angular control for higher structural stiffness and load capacity.",
+    figs:[{ real:"assets/vertical-plow.jpg", cap:"Plow configuration shaping a berm in the field" }],
+    system:"Linear actuation sets the tool height: extension raises the tool and retraction lowers it into the soil. A Seeed XIAO ESP32-C3 drives the actuator through a motor driver and exposes it to the robot as a ROS2 node over WebSockets, the same control architecture as the Jackal design. The system uses two independent power buses: a dedicated battery supplies the XIAO and actuator, while the RMP 440LE V3 runs on its own battery. The field berm was constructed under teleoperation in two stages: the tiller loosens a strip of soil along the contour, the tool is swapped, and the plow shapes the loosened soil into a crest using short strokes kept below the wheel-slip current limit.",
+    testing:{ title:"Field trial", html:`
+      <p>We built one full-scale demi-lune at Hadley, Massachusetts, then monitored it through August 2026.</p>
+      <ul><li><b>Energy:</b> tilling used 12.94 Wh and shaping 159.47 Wh, 172.41 Wh in total, or 16.4% of the rover's battery. One charge could build about 6 similar structures.</li>
+      <li><b>Load:</b> tilling averaged 138 W with peaks of 1,372 W; shaping averaged 60 W with peaks of 1,772 W, consistent with the higher draft of the blade. Per meter of travel, shaping cost 1.47 kJ/m and loosening 1.18 kJ/m.</li>
+      <li><b>Moisture retention:</b> over August, soil inside the crescent retained 68% of its initial moisture index, more than twice the surrounding soil (32%) and over five times an uncovered control patch (12%). Readings were taken at 12.7 cm depth, three samples averaged per station.</li>
+      <li><b>Structural durability:</b> photogrammetry scans aligned in Rhino 3D showed only a 10% reduction in crest height (16.7 to 15.9 cm) over the month without any compaction, while the basin captured 0.095 m³ of sediment, as a functioning demi-lune should.</li></ul>` },
+    nums:[["2.1×","moisture retention vs. surrounding soil"],["240 cm","berm radius"],["16.4%","battery per berm"],["~6","berms per charge"]],
+    results:["Built a full-scale demi-lune (240 cm radius, 20.3 cm trough-to-crest) under teleoperation","Retained more than twice the soil moisture of the surrounding ground and captured sediment over the month, confirming the berm functions as designed","Step toward autonomy: I converted the teleoperated sequence into a ROS action that executes the full loosen, swap and shape cycle along an 8-waypoint trajectory. In a dry run it completed loosening in 110.6 s, tool swap in 18.7 s and shaping in 221.2 s; running it with tools engaged in soil is the next milestone toward fully autonomous berm construction.","This work contributes to a paper our team has submitted to ICRA 2027 (under review)."],
+    resFigs:[{ real:"assets/vertical-berms-field.jpg", cap:"The demi-lune at the Hadley field site; panels A–C are in chronological order" }],
+    lessons:["Every design choice is a trade-off. Replacing angle modulation with vertical actuation produced a simpler, stiffer and stronger system, which mattered more in real soil than on the test bed.","Modularity has a structural cost. Interchangeable tools add joints, and every joint is a potential failure point; we are currently redesigning the connections for higher strength without giving up quick tool changes.","Field work needs measurement planned from the start. Energy logging, moisture sampling and photogrammetry turned a single berm into evidence about cost, water retention and durability."] },
+  { id:"p02", no:"P-02", title:"Angle-Modulated End-Effector", year:"2026", tags:"Mechatronics · Embedded · ROS2 · Field robotics",
+    sk:"assets/angle-jackal-berm-sketch.jpg", real:"assets/angle-jackal-berm.jpg",
+    note:"I redesigned a berm-digging end-effector for the Clearpath Jackal: a top-mounted, rover-agnostic tool whose plow angle is set by a linear actuator and controlled through ROS2.",
+    context:"Harvard PRISE research fellowship, Digital Fabrication Lab · Jun to Aug 2026 · Clearpath Jackal",
+    problem:"Degraded arid and semi-arid land develops crusted, compacted soil that sheds water instead of holding it. Our approach is to build small soil berms that raise the soil's moisture retention until it can support vegetation again, drawing on indigenous techniques such as demi-lunes. Those techniques are effective but labor-intensive, and heavy machinery is too expensive to deploy widely. A low-cost tool maximizes how many sites can adopt it, and a rover-agnostic design means field teams are not tied to one specific, expensive robotic platform.",
+    build:"I designed the end-effector from zero in Fusion 360, replacing an earlier front-mounted unit that combined the plow and tiller in one piece. The new assembly has three parts: a base that bolts to the top of the rover, where most robotic platforms already provide mounting holes; a rotary mount; and a plow built around an aluminum rod. Structural parts are 3D printed, the actuator runs on a screwdriver battery, and total hardware cost stays around $330.",
+    system:"A linear actuator acts as the plow's pivot. Extending it lifts the plow clear of the ground; retracting it lowers the plow toward the soil with enough clearance to cut beneath the surface. A Seeed XIAO ESP32-C3 drives the actuator through a motor driver. I packaged the actuator as a ROS2 node that communicates with the XIAO over WebSockets, so the plow angle is commanded from the rover's own software. During digging, the angle is varied 5 to 10 degrees between passes.",
+    figs:[{ real:"assets/angle-berm-testbed.jpg", cap:"Berm dug by the end-effector on the compressed-soil test bed" }],
+    testing:{ title:"Compaction testing", html:`
+      <p>Compaction serves two purposes: a berm only retains water if its walls are dense enough to hold it, and it only lasts if those walls resist erosion from rain and runoff. I compared ways of compacting a freshly dug berm using the rover itself. All trials ran on a semi-arid, compressed-soil test bed with live ROS2 logging.</p>
+      <p>For each trial I followed this procedure:</p>
+      <ol><li>Build the berm in several plow passes.</li><li>Measure the penetration resistance of its walls.</li><li>Compact the berm by driving the rover over it, then measure again.</li></ol>
+      <p>I tested three compaction strategies:</p>
+      <ul><li><b>Radial:</b> starting from the center of the berm's circle, the rover drives straight out over the berm and back, once it is fully built.</li><li><b>Concentric:</b> the rover drives over the berm in expanding concentric circles, once it is fully built.</li><li><b>Intermediate-radial:</b> radial compaction carried out between building passes rather than only at the end. I added this method after radial outperformed concentric.</li></ul>
+      <div class="tbl"><table class="data"><thead><tr><th>Method</th><th class="num">Front wall</th><th class="num">Back wall</th><th class="num">Height</th></tr></thead><tbody>
+        <tr><td>Concentric</td><td class="num">0.090</td><td class="num">0.030</td><td class="num">4.7 in</td></tr>
+        <tr><td>Radial</td><td class="num">0.181</td><td class="num">0.060</td><td class="num">4.0 in</td></tr>
+        <tr class="best"><td>Intermediate-radial</td><td class="num">0.271</td><td class="num">0.060</td><td class="num">4.5 in</td></tr>
+      </tbody></table></div>
+      <p class="fn">Wall pressure in kg/cm², from penetration resistance. Height measured from ground level.</p>
+      <div class="figs"><figure class="f2"><div class="fr"><img src="assets/angle-compaction-panel.jpg" alt="Berms after radial, concentric and intermediate-radial compaction"></div><figcaption>Berms after compaction: (A) radial, (B) concentric, (C) intermediate-radial</figcaption></figure></div>` },
+    nums:[["~$330","hardware cost"],["3×","wall pressure vs. concentric"],["1.8 A","slippage threshold"],["4–4.5 in","berm height"]],
+    results:["Intermediate-radial compaction produced the firmest, most erosion-resistant berm walls: 0.271 kg/cm² on the front wall, 1.5× radial and 3× concentric","Identified a motor current of about 1.8 A as the onset of wheel slippage, a practical limit on how hard the rover can push","Built 4 to 4.5 in berms on the test bed with a low-cost, top-mounted tool"],
+    lessons:["This was my first large-scale project without step-by-step instructions. The end goal was defined, but how to reach it was entirely up to me, which taught me to plan a project, set my own objectives and milestones, and adjust them as results came in.","Print geometry matters as much as the CAD. When the first 3D-printed mounting bracket failed, I learned how different infill geometries and support strategies change the strength and durability of a part, and reprinted it accordingly.","Packaging the actuator as a standalone ROS2 node makes the end-effector straightforward to integrate with any rover that runs ROS2."] },
+  { id:"p03", no:"P-03", title:"PRISE Fellow · Robotics for Ecological Restoration", year:"2026", tags:"Research · Robotics · Land restoration",
+    sk:"assets/prise-sketch.jpg", real:"assets/prise-cover.jpg",
+    note:"Summer research fellowship in Harvard's Program for Research in Science and Engineering (PRISE), Department of Physics. I redesigned a rover-agnostic robotic end-effector for digging soil berms, built a tool-changing approach, and ran berm digging and compaction experiments that fed into the vertical and angle-modulated end-effectors (P-01, P-02) and a co-authored IEEE GHTC 2026 paper.",
+    context:"Harvard PRISE · Department of Physics · Digital Fabrication Lab · Jun to Aug 2026 · Advisor: Nathan Melenbrink · Co-author: Mazen Abdul-Knerr",
+    sections:[
+      ["problem","Problem",`<p>Land degradation, driven by erosion, nutrient depletion and desertification, affects 40% of Earth's land, impacts 3 billion people and costs the global economy around 10 trillion USD a year. There is no large-scale solution. Robotics research tends to focus either on precise, localized manipulation or on industrial-scale excavation, leaving a gap in medium-scale robotic earthwork. Building on Toluwaniase Ademola's approach, the project asks: <b>how do we design a rover-agnostic robotic end-effector for land restoration?</b></p>`],
+      ["methods","Methods",`<p>In the Digital Fabrication Lab I redesigned the end-effector and developed a tool-changing approach. The previous model mounted to the front of the rover, but most robotic platforms only provide mounting holes on top, so the new design mounts exclusively on top. It combines 3D-printed parts, a linear actuator, an aluminum rod, a screwdriver battery and a XIAO microcontroller.</p><p>I ran experiments on a custom test bed that emulates semi-arid compressed soil, logged real-time data through ROS2, and developed a method for digging and compacting berms.</p>`],
+      ["results","Results",`<ul><li>The main stress point is the back-center of the rotating mount, which we reinforced.</li><li>Slippage occurs most often when turning or under heavy load; when the Jackal slips, each motor typically draws more than 1.8 A.</li><li>Several passes with 5 to 10 degree plow-angle variations proved an efficient digging method, producing taller and wider berms: 4 to 4.5 in above ground and about 6.5 in from the lowest point.</li><li>Among three compaction methods, intermediate-radial was the most efficient: it preserved the berm's dimensions, compressed the walls to 0.27–0.54 kg/cm² (vs. 0.181 radial and 0.091 concentric) and showed fewer slippage events.</li></ul>`],
+      ["next","Outcomes",`<ul><li>Extended the work to the Segway RMP 440LE with a vertical end-effector and a field trial in Hadley, Massachusetts (P-01).</li><li>Co-authored the IEEE GHTC 2026 paper “Assessing the Potential Utility of Low-Cost Robotic End-Effectors for Ecological Restoration”.</li><li>Ongoing: tool changing, multi-robot experiments and steps toward a semi-autonomous system.</li></ul><p>Supported by a $3,000 award from the Harvard College Office of Undergraduate Research and Fellowships.</p>`],
+      ["poster","Poster",`<div class="figs"><figure class="f2"><div class="fr"><img src="assets/prise-poster-render.jpg" alt="Poster: Restoring Land through a Robotic End-Effector"></div><figcaption>Restoring Land through a Robotic End-Effector · D. Cuevas Vega, M. Abdul-Knerr, N. Melenbrink</figcaption></figure></div><p style="margin-top:14px"><a class="btn" href="assets/PRISE_Poster_CuevasVega.pdf" target="_blank" rel="noopener" download>DOWNLOAD POSTER (PDF) ↓</a></p>`]
+    ],
+    nums:[], results:[] },
+  { id:"p04", no:"P-04", title:"Oscillating Air Engine", year:"2026", tags:"Precision machining · Mechanical design · Manufacturing",
+    sk:"assets/engine-sketch.jpg", real:"assets/engine.jpg",
+    note:"I machined all 11 components of a single-cylinder oscillating engine from steel, brass, aluminum and acrylic on a manual mill and lathe, working from engineering drawings to tolerances of ±0.0005 in. The assembled engine runs on compressed air.",
+    context:"Harvard SEAS / Physics Machine Shop certification · Jul 2026",
+    problem:"The project is the capstone of the Harvard machine shop certification: produce a working mechanism entirely by hand from a set of engineering drawings. An oscillating engine is unforgiving to build, because it only runs if the port faces seal, the piston fits its bore closely and the crank and pivot are aligned, so every dimensional error shows up as leakage or friction.",
+    build:"I produced each part from raw stock on a manual lathe and mill: the flywheel and turned features in aluminum and brass, the frame and base in aluminum and steel, and the cylinder block in clear acrylic so the mechanism is visible. Machining involved facing, turning, boring, drilling and tapping holes in four thread sizes, holding critical features to ±0.0005 in.",
+    figs:[{ real:"assets/engine-lathe.jpg", cap:"Drilling the aluminum flywheel on the lathe" },{ real:"assets/engine-acrylic.jpg", cap:"Acrylic cylinder block with tapped holes and brass fittings" }],
+    sysFigs:[{ video:"assets/engine-running.mp4", cap:"The finished engine running on compressed air", tall:true }],
+    system:"Compressed air enters through a port in the frame. The cylinder pivots on a pin and is held against the port face by a spring; as the crank turns, the cylinder rocks so that its port alternately aligns with the inlet, driving the piston, and with the exhaust, releasing the spent air. The piston drives the crank pin, and the flywheel stores enough momentum to carry the engine through the rest of each cycle.",
+    nums:[["11","parts machined"],["±0.0005 in","tightest tolerance"],["4","thread sizes tapped"],["4","materials"]],
+    results:["Fully assembled engine that runs reliably on compressed air","Certified on the manual mill and lathe in the Harvard SEAS / Physics machine shop"],
+    lessons:["Tolerances compound. A small error on one part shows up as leakage or binding in the assembly, so I learned to measure continuously and plan operations around the critical dimensions.","Each material machines differently; adjusting speeds, feeds and tooling for steel, brass, aluminum and acrylic was as important as reading the drawings.","Hands-on manufacturing experience changes how I design: I now consider how a part will be made, fixtured and measured while I am still drawing it in CAD."] },
+  { id:"p05", no:"P-05", title:"UNDP Philippines Budget Dashboard", year:"2026", tags:"Data analysis · Public finance · Climate policy · Web dashboard",
+    sk:"assets/undp-sketch.jpg", real:"assets/undp-logo.jpg",
+    note:"With Harvard Global Research & Consulting, I co-developed a web dashboard that lets UNDP Philippines economists compare national budget tables side by side and analyze climate-change expenditure. The tool was presented to the UNDP country office and is now in active use.",
+    context:"Harvard Global Research & Consulting (GRC) · client: UNDP Philippines · team of 4 · Jan to May 2026",
+    problem:"UNDP economists in the Philippines rely on national budget data published through the government's own portal, which is slow and inefficient to navigate: the data is split across large, separate tables, so comparing allocations across years, departments and policy priorities was slow and manual. The office wanted all of it consolidated in a single, fast site. Tracking climate-change spending is especially important: the country's National Climate Change Action Plan (NCCAP) defines strategic priorities, and policymakers need to see how the budget maps onto them.",
+    build:"Our team of four built the dashboard as a web application. I was responsible for the Compare view, which places budget tables side by side so analysts can examine differences directly, and for the two climate-expenditure views: spending by department and spending by NCCAP strategic priority, each with supporting analysis. I built the views using AI-assisted development with Claude, which let our team go from requirements to a working tool in weeks.",
+    figs:[{ real:"assets/undp-compare.jpg", cap:"Compare view: two regions' 2026 infrastructure outlays side by side, with year and currency (PHP/USD) controls" }],
+    system:"The dashboard is organized into views that each answer one analytical question. The Compare view aligns tables for direct comparison, while the climate-expenditure views aggregate tagged spending by department and by NCCAP strategic priority. Features were scoped and refined through recurring feedback sessions with a UNDP country economist, so the final design reflects how the office actually works with the data.",
+    sysFigs:[{ real:"assets/undp-matrix.jpg", cap:"Comparison matrix: regional funding scale vs. spending concentration (HHI), highlighting the two selected regions" },
+             { real:"assets/undp-climate.jpg", cap:"Climate-change expenditure view (GAA table B.21): adaptation vs. mitigation and spending by department" }],
+    nums:[["4","team members"],["3","views I built"],["5 mo.","Jan to May 2026"],["In use","at UNDP Philippines"]],
+    results:["Delivered a working dashboard and presented it to the UNDP Philippines office, where it is now in active use","Built the Compare view and both climate-expenditure views (by department and by NCCAP strategic priority)"],
+    lessons:["Working with a real client means designing for the user's workflow, not for the data structure. Iterating with the country economist changed which comparisons we prioritized.","Climate finance analysis depends on clear categorization; mapping expenditure to NCCAP priorities required careful handling of how spending is tagged.","This project connected my economics background with software: turning a policy question into a tool people use every day."],
+    link:["Open the live dashboard","https://shahudh670-hue.github.io/UNDPdash/#/comparison"] },
+  { id:"p06", no:"P-06", title:"Wireless Bike Turn Signals", year:"2025", tags:"Embedded · Wireless · Power electronics · 3D printing",
+    sk:"assets/bike-soldering-sketch.jpg", real:"assets/bike-soldering.jpg",
+    video:{ src:"assets/bike-demo.mp4", poster:"assets/bike-demo-poster.jpg", cap:"Project video: the problem, the build and a night-time comparison with hand signals." },
+    note:"I designed and built a wireless turn-signal system for bicycles: a handlebar switch sends left and right signals over ESP-NOW to a weather-resistant LED light bar mounted on the rear of the bike.",
+    context:"PS70: Introduction to Digital Fabrication · Harvard · Sep to Dec 2025",
+    problem:"In 2023 there were 1,377 preventable bicycle-related deaths in the US, and there is still no reliable way for a cyclist to signal a turn at night: hand signals are hard to see in the dark and mean riding one-handed. My first prototype ran a wire along the length of the bike, and its handlebar clamp did not hold firmly. Feedback called for a wireless system with better water resistance, which became the brief for the final version.",
+    build:"I designed two 3D-printed PLA enclosures. The handlebar unit holds a Seeed XIAO and a LiPo battery and uses a screw clamp that tightens around different handlebar sizes. The rear baseplate has a cavity for the ESP32, power electronics and battery pack; a curved channel that routes the LED strip without sharp bends; an opening for the battery's USB cable; and a press-fit lid printed as the negative of the cavity. It mounts to the bike with M3 × 30 screws and nuts. I soldered and shortened the switch circuit to fit its housing, then encapsulated both units.",
+    figs:[{ real:"assets/bike-baseplate.jpg", cap:"Rear baseplate: LED strip, ESP32 and power electronics inside the printed cavity" },
+          { video:"assets/bike-soldering-clip.mp4", cap:"Soldering the handlebar switch circuit" }],
+    resFigs:[{ real:"assets/bike-project-fair.jpg", cap:"Final project fair: baseplate iterations on the table, final light bar mounted on the bike" }],
+    system:"The XIAO reads the left and right switch states every 2 seconds and sends them over ESP-NOW, a peer-to-peer protocol that needs no Wi-Fi network. The ESP32 in the baseplate listens continuously and lights the matching side of a 12 V addressable LED strip, rated IP65 for water and dust resistance. A boost converter steps the 5 V battery supply up to 12 V for the strip, and a logic-level converter raises the 3.3 V data signal to the level the strip expects.",
+    sysFigs:[{ video:"assets/bike-wireless.mp4", cap:"Wireless link test: the handlebar switch lights each side of the light bar over ESP-NOW, with no wire along the bike" }],
+    testing:{ title:"Iterations", html:`<p>The system went through five iterations, each driven by testing or feedback:</p>
+      <ol><li><b>Wired prototype:</b> a single cable along the bike connected the switch to the lights.</li>
+      <li><b>Brighter lights:</b> replaced the 5 V strip with a 12 V, IP65-rated strip for visibility and weather resistance.</li>
+      <li><b>Adjustable clamp:</b> replaced the fixed clamp with a screw mechanism that grips different handlebars firmly.</li>
+      <li><b>Wireless link:</b> rewrote the firmware for ESP-NOW, validating the link with a single LED before driving both signals.</li>
+      <li><b>Baseplate redesigns:</b> several versions to fit the electronics, smooth the LED path and give access to the battery's USB cable, ending with a press-fit lid.</li></ol>` },
+    nums:[["ESP-NOW","wireless link"],["12 V","IP65 LED strip"],["2 s","switch polling interval"],["5","design iterations"]],
+    results:["Working wireless turn-signal system, encapsulated and mounted on a bike","Night-time ride comparing standard hand signals with the light bar (see the project video)","Demonstrated at the PS70 final project fair"],
+    lessons:["Interface levels matter as much as supply voltages. Driving the 12 V strip's data line directly from the ESP32's 3.3 V output burned out the board; adding a logic-level converter solved it, and I now check signal levels before connecting components.","Abstraction speeds up debugging. Proving the wireless link with a single LED first separated communication problems from power and LED problems.","I started the course with no hands-on engineering background. It taught me to treat failure as part of iteration and to ask peers for help early.","Next iterations would add sleep modes and a higher-capacity battery for longer runtime, and a sealed charging port."],
+    link:["Full build log on my PS70 site","https://dicuve06.github.io/PS70/13_finalproject/index.html"] },
+  { id:"p07", no:"P-07", title:"Tool-Changing Prototype", year:"2026", tags:"Mechanism design · 3D printing · Embedded control",
+    sk:"assets/tool-sketch.jpg", real:"assets/tool-cover.jpg",
+    note:"A 3D-printed tool-changing mechanism that mounts directly onto aluminum extrusion and uses two servo-driven locking slots to secure interchangeable tools, developed as the next step toward letting our restoration rovers switch between a tiller and a plow without manual intervention.",
+    context:"Harvard Digital Fabrication Lab · 2026 · in development",
+    problem:"In the field trials, switching between the tiller and the plow on the vertical end-effector was done by hand. Autonomous berm construction requires the robot to change tools by itself, reliably and without adding heavy or expensive hardware.",
+    build:"I designed the mechanism in CAD and 3D printed it as a compact housing that mounts directly onto standard aluminum extrusion through a matching profile, so it integrates with the modular frame of the vertical end-effector. Two servo actuators each drive a spur gear that engages a printed rack, translating a slot that captures the tool.",
+    figs:[{ real:"assets/tool-rack.jpg", cap:"Rack-and-pinion locking slots and internal geometry" },{ real:"assets/tool-extrusion.jpg", cap:"Extrusion-profile interface that mounts directly onto the aluminum frame" }],
+    system:"Each servo rotates its pinion to translate the rack, moving the slot into position to lock the tool in place or retracting it to release the tool. The servos are commanded over WebSockets, the same communication layer used by the end-effectors, so the mechanism can be integrated into the rover's ROS2 control system with minimal changes.",
+    sysFigs:[{ video:"assets/tool-video.mp4", cap:"Servo-driven locking slots actuated over WebSockets from a computer interface", tall:true }],
+    nums:[["2","servo actuators"],["Rack & pinion","locking drive"],["WebSockets","control interface"]],
+    results:["Working prototype: both servos drive their locking slots on command over WebSockets, with the mechanism mounted directly on the aluminum extrusion","Built on the same communication architecture as the end-effectors, enabling straightforward integration into autonomous tool changes"],
+    lessons:["Designing for existing interfaces, both the extrusion profile mechanically and WebSockets for control, keeps a new subsystem compatible with the rest of the robot from day one.","Printed gears and racks need clearance tuned to the printer's tolerances; the fit was refined over several print iterations."] },
+  { id:"p08", no:"P-08", title:"Turf Wars Rover", year:"2025", tags:"Mechanical design · Drivetrain · FEA · Fabrication",
+    sk:"assets/turf-sketch.jpg", real:"assets/turf-prize.jpg",
+    note:"As part of a five-person team in ES51: Introduction to Mechanical Engineering, I designed and built “The Squirrel's Tail”, a remote-controlled competition robot with a belt-driven two-bar arm that lifts objects to a 21-inch shelf. We fabricated nearly every component ourselves, and I drove the robot in the final tournament, where we placed 2nd.",
+    context:"ES51: Introduction to Mechanical Engineering · Harvard SEAS · Team Squirrels (5) · Sep to Dec 2025",
+    problem:"Turf Wars is the ES51 final competition. The robot had to start inside an 11 × 11 × 11 in box, climb 15° and 30° ramps on turf, pick up tennis balls and hollow dog toys, and place them on shelves at 7, 14 and 21 in, using only a fixed kit of materials over three months. We set three success criteria: acquire a dog toy within 10 seconds, lift it to 21 in without tipping, and traverse both ramps without high-centering.",
+    build:"We compared three lifting concepts (forklift, four-bar linkage and a two-bar \u201cSquirrel's Tail\u201d) with a Pugh matrix; the Squirrel's Tail won for reach, tolerance and acquisition time. The full robot was modeled in SOLIDWORKS and built with five processes: laser-cut acrylic for the base and arm, 3D-printed PLA mounts, gears and claw, aluminum shafts and tensioners turned on the lathe and milled to remove mass, wheels machined on the CNC, and silicone-cast (Dragon Skin) treads for grip on turf. Custom motor and shaft supports kept the drivetrain compact and the center of gravity under the mast.",
+    figs:[{ real:"assets/turf-drawings.jpg", cap:"SOLIDWORKS assembly drawing of the final robot (rev. 24)" },{ real:"assets/turf-drivetrain.jpg", cap:"Compact drivetrain with custom motor and shaft supports" }],
+    system:"Two rear motors drive all four wheels through a 4:1 reduction and belts, giving a zero-radius, tank-style turn. The arm runs through a 5.33:1 gear and pulley train to a mast-mounted pivot, and a servo-actuated claw at its tip grips the objects. I sized the drivetrain from a free-body analysis of the ramps (0.159 N·m per motor at 15°, 0.306 N·m at 30°), worked out the arm's worst-case holding torque (0.419 N·m with a tennis ball at 90°) against measured motor curves, and ran FEA in SOLIDWORKS on the arm, which led us to add bearings at the claw joint and enlarge the top of the beam to spread stress. The claw was redesigned with points that hook into the hollow dog toys and a curve matched to the tennis-ball radius, so grip no longer depended only on servo strength.",
+    sysFigs:[{ real:"assets/turf-fea.jpg", cap:"SOLIDWORKS FEA of the arm beam: peak stress at the claw joint" },{ real:"assets/turf-ball.jpg", cap:"The arm placing a dog toy on the 21-inch shelf" }],
+    nums:[["2nd","place, Turf Wars"],["24.1 in","maximum reach"],["5.67 lb","lightest robot in the field"],["0 in","turning radius"]],
+    results:["Placed 2nd in the ES51 Turf Wars competition, Fall 2025; I drove the robot in the final tournament","Met all success criteria: fit the 11-inch box, acquired objects in under 10 seconds, lifted dog toys to 21 in without tipping and climbed both ramps","Lightest robot in the field while using more aluminum than most teams, thanks to milling and turning out excess mass"],
+    lessons:["Design for serviceability, not just performance. The arm's belt stretched in the final round, and our tensioner was harder to adjust than planned; a machined threaded tensioning rod, like the one on the drivetrain, would have fixed it.","Margins matter. The servo was weaker than we estimated, and a larger gear ratio on both the arm and the claw would have reduced strain and improved placement precision.","Analysis pays off when it drives decisions: the ramp, torque and FEA calculations directly shaped the gear ratios, the joint bearings and the compact drivetrain."],
+    link:["Download the full project report (PDF)","assets/TurfWars_Report.pdf"] },
+  { id:"p09", no:"P-09", title:"PianoMan", year:"2026", tags:"Embedded systems · Circuit design · Wireless · Power electronics",
+    sk:"assets/pianoman-sketch.jpg", real:"assets/pianoman-cover.jpg",
+    video:{ src:"assets/pianoman-video.mp4", poster:"assets/pianoman-poster.jpg", cap:"Project video: build process, gameplay and the live leaderboard." },
+    note:"A real-time arcade game inspired by the mobile app Piano Tiles, built by a team of three in ES50. A 4×4 grid of LED pushbuttons shows falling tiles, plays music through an amplified speaker, and streams each player's score wirelessly to a live web leaderboard.",
+    context:"ES50: Introduction to Electrical Engineering · Harvard SEAS · team of 3 · May 2026",
+    problem:"Build an interactive system that combines input processing, LED driving, analog audio and wireless communication into one reliable product, within a $100 budget and about 2.5 weeks.",
+    build:"The game runs on an Arduino MKR Zero driving a 4×4 matrix of 12 V LED arcade buttons through NPN transistors and PMOS/NMOS MOSFETs, with row-column scanning. A TL081/LM386 amplifier stage drives the speaker. I designed the wireless network between the ESP32 and the leaderboard, designed and implemented the buck converters that power each part of the circuit from the 12 V supply, helped debug the code and LED matrix, and designed and laser cut the acrylic enclosure in Fusion 360.",
+    figs:[{ real:"assets/pianoman-enclosure.jpg", cap:"Fusion 360 model of the laser-cut acrylic enclosure" },{ real:"assets/pianoman-ledgrid.jpg", cap:"Schematic of the 4×4 LED grid with transistor and MOSFET drivers" }],
+    system:"Button press → Arduino digital read → game logic → LED grid update, audio tone and score event → UART to ESP32 → WebSocket broadcast → browser. The MKR Zero runs the game logic and sends score and miss events over UART (9600 baud) to an ESP32, which hosts its own Wi-Fi network and serves the leaderboard page, pushing live updates to every connected device over WebSockets. The rows are multiplexed with a 2 ms delay per row so the grid appears continuously lit without overheating.",
+    sysFigs:[{ real:"assets/pianoman-uart.jpg", cap:"ESP32 ↔ MKR Zero UART link and the 12 V to 3.3 V regulation stage" },{ real:"assets/pianoman-flow.jpg", cap:"Game logic flow" }],
+    nums:[["16","LED pushbuttons"],["45 s","game round"],["$100","budget"],["2.5 wk","build time"]],
+    results:["Fully working arcade game with music, a 3-second miss penalty and a live wireless leaderboard","Oscilloscope tests confirmed a clean amplified audio signal without clipping","Presented at the ES50 Design Fair 2026"],
+    resFigs:[{ real:"assets/pianoman-play.jpg", cap:"Playing the finished game" }],
+    lessons:["Splitting responsibilities across microcontrollers made the system more reliable: the MKR Zero handles timing-critical game logic while the ESP32 handles networking.","Power design is part of the system design. The regulator feeding the ESP32 overheated under load, which taught me to size regulators for peak current and led us to buck converters.","Testing each subsystem in isolation, from LED ghosting to audio tones to leaderboard messages, made final integration far faster."],
+    link:["Download the project report (PDF)","assets/PianoMan_Report.pdf"] }
+];
+
+const ROLES = [
+  { kind:"r", at:"2026-09", when:"Sep 2026 – now", title:"Course Assistant", org:"Harvard Physics · FYSEMR 58E: Machine Ecology",
+    pts:["Integrated RTK GPS into the rover's navigation stack for autonomous waypoint following","Co-developed a pure pursuit controller fusing RTK GPS and IMU data","Lead 12 students across navigation, mechanical and soil/ecology subteams"] },
+  { kind:"l", at:"2026-09", when:"Sep 2026 – now", title:"Program Director", org:"PRIMEX · Program to Increase Mexican Representation at Harvard",
+    pts:["Doubled mentors to 28 across 9 Harvard schools for a free admissions mentorship program","150+ applications for 50 spots; outreach video with 400K+ views"] },
+  { kind:"l", at:"2026-09", when:"Sep 2026 – now", title:"Board Member", org:"HUMEX · Harvard University Mexican Association",
+    pts:["Plan and budget weekly programming for 20+ members"] },
+  { kind:"r", at:"2026-06", when:"Jun – Aug 2026", title:"PRISE Research Fellow", org:"Harvard Digital Fabrication Lab · Robotics for Ecological Restoration",
+    pts:["Designed two rover-agnostic ~$330 berm-digging end effectors, field-tested on Jackal and RMP 440 rovers","Wrote ESP32-C3 actuator firmware and ROS2 nodes over WebSockets"] },
+  { kind:"l", at:"2026-01", when:"Jan 2026 – now", title:"Project Lead", org:"HUCEG BUILD · Harvard Undergraduate Clean Energy Group",
+    pts:["Lead 10 members building a solar-powered hive monitor for weight, bee count, temperature, humidity and sound"] },
+  { kind:"l", at:"2025-09", when:"Sep 2025 – now", title:"Sourcing Analyst", org:"HUCP · Harvard Undergraduate Capital Partners",
+    pts:["Source about 5 startups a week for a partner VC firm; recommendations have led to 3 warm founder intros"] }
+];
+
+/* projects on the timeline: sort key + date label only (details live in the folios) */
+const TL_PROJECTS = [
+  { id:"p06", at:"2025-09", when:"Sep – Dec 2025" },
+  { id:"p05", at:"2026-01", when:"Jan – May 2026" },
+  { id:"p01", at:"2026-06", when:"Jun – Aug 2026" },
+  { id:"p02", at:"2026-06", when:"Jun – Aug 2026" },
+  { id:"p04", at:"2026-07", when:"Jul 2026" },
+  { id:"p03", at:"2026-08", when:"Jun – Aug 2026" },
+  { id:"p08", at:"2025-12", when:"Fall 2025" },
+  { id:"p09", at:"2026-05", when:"May 2026" }
+];
+
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const emptyPlate = (t) => `<div class="empty"><div>
+  <svg viewBox="0 0 200 140" aria-hidden="true" class="rough"><rect x="10" y="10" width="180" height="120" fill="none" stroke="#2f2118" stroke-width="1.5"/><path d="M10 10 L190 130 M190 10 L10 130" stroke="#bba98c" stroke-width="1" fill="none"/><circle cx="100" cy="70" r="28" fill="none" stroke="#a3412a" stroke-width="1.4" stroke-dasharray="5 5"/></svg>
+  <p>sketch coming soon</p></div></div>`;
+
+/* ---------- project index + plate ---------- */
+const toc = $('#toc');
+toc.innerHTML = PROJECTS.map((p,i) => `
+  <li data-i="${i}"><button type="button" aria-label="${esc(p.title)}">
+    ${(p.sk || p.real) ? `<img class="thumb" src="${p.sk || p.real}" alt="" loading="lazy">` : `<span class="thumb" style="background:var(--paper-deep)"></span>`}
+    <span class="no">${p.no}</span><span class="t">${esc(p.title)}</span><span class="yr">${p.year}</span>
+    <span class="tags">${esc(p.tags)}</span>
+  </button></li>`).join('');
+
+let current = 0;
+function showPlate(i){
+  current = i; const p = PROJECTS[i];
+  toc.querySelectorAll('li').forEach(li => li.classList.toggle('on', +li.dataset.i === i));
+  $('#plate-ph').innerHTML = p.sk
+    ? `<img class="sk" src="${p.sk}" alt="Sketch of ${esc(p.title)}" style="${p.contain?'object-fit:contain;padding:14px':''}"><img class="real" src="${p.real}" alt="" style="${p.contain?'object-fit:cover':''}">`
+    : p.real ? `<img src="${p.real}" alt="${esc(p.title)}">` : emptyPlate(p.title);
+  $('#plate-no').textContent = p.no; $('#plate-t').textContent = p.title; $('#plate-yr').textContent = p.year;
+  $('#plate-note').textContent = p.note;
+}
+toc.addEventListener('mouseover', e => { const li = e.target.closest('li'); if (li) showPlate(+li.dataset.i); });
+toc.addEventListener('focusin', e => { const li = e.target.closest('li'); if (li) showPlate(+li.dataset.i); });
+toc.addEventListener('click', e => { const li = e.target.closest('li'); if (li) openFolio(PROJECTS[+li.dataset.i].id); });
+$('#plate').addEventListener('click', () => openFolio(PROJECTS[current].id));
+$('#plate').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFolio(PROJECTS[current].id); } });
+$('#plate-open').addEventListener('click', () => openFolio(PROJECTS[current].id));
+showPlate(0);
+
+/* ---------- folio sheet ---------- */
+const sheet = $('#sheet'), pg = $('#pg');
+let lastFocus = null;
+const todo = '<p class="todo">to be written together</p>';
+function figsHTML(list){
+  return `<div class="figs">${list.map(f => `<figure class="f2${f.sk ? ' swap2' : ''}"><div class="fr">${
+    f.video ? `<video src="${f.video}" muted loop autoplay playsinline preload="metadata" aria-label="${esc(f.cap)}"${f.tall ? ' class="tall"' : ''}></video>`
+    : f.sk ? `<img class="sk" src="${f.sk}" alt="Sketch: ${esc(f.cap)}"><img class="real" src="${f.real}" alt="${esc(f.cap)}">`
+    : `<img src="${f.real}" alt="${esc(f.cap)}">`}</div><figcaption>${esc(f.cap)}</figcaption></figure>`).join('')}</div>`;
+}
+function block(h, body, id){ return `<div class="blk"${id ? ` id="s-${id}"` : ''}><h3>${h}</h3><div>${body}</div></div>`; }
+const SHORT = { p01:'Vertical End-Effector', p02:'Angle-Mod. End-Effector', p03:'PRISE Fellowship', p04:'Air Engine', p05:'UNDP Dashboard', p06:'Bike Signals', p07:'Tool Changer', p08:'Turf Wars Rover', p09:'PianoMan' };
+const COG = (() => {
+  // geometric spur gear after Diego's reference: smooth involute-like teeth, triple rim,
+  // six rounded lightening windows in sepia, red-chalk hub with keyed bore, centre lines
+  const INK = '#2f2118', SEPIA = '#8a5a2b', RED = '#a3412a', FAINT = '#9c8a74';
+  const f = n => n.toFixed(2), P = (r, a) => `${f(r * Math.cos(a))} ${f(r * Math.sin(a))}`;
+  const circ = (r, sw, col, extra = '') => `<circle r="${r}" fill="none" stroke="${col}" stroke-width="${sw}" ${extra}/>`;
+  let g = '';
+  // tooth outline: straight flanks, flat tip arcs, root arcs between teeth
+  const T = 26, ro = 148.5, rr = 129.5, pitch = 2 * Math.PI / T, wt = .17 * pitch, wr = .29 * pitch;
+  let td = '';
+  for (let t = 0; t < T; t++) {
+    const c = t * pitch;
+    td += (t === 0 ? 'M' : 'L') + P(rr, c - wr)
+       + ` L${P(ro, c - wt)} A${ro} ${ro} 0 0 1 ${P(ro, c + wt)}`
+       + ` L${P(rr, c + wr)} A${rr} ${rr} 0 0 1 ${P(rr, c + pitch - wr)}`;
+  }
+  g += `<path d="${td} Z" fill="var(--paper-deep)" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/>`;
+  g += circ(149.5, .5, FAINT);                                         // addendum circle
+  g += circ(139, .6, FAINT, 'stroke-dasharray="10 3 2 3"');            // pitch circle
+  // rim: heavy, light, heavy
+  g += circ(127, 2.2, INK) + circ(122.5, .8, INK) + circ(118, 1.6, INK);
+  g += circ(110, .5, FAINT, 'stroke-dasharray="4 4"');
+  // six rounded windows
+  const r1 = 66, r2 = 104, a1 = 13 * Math.PI / 180, a2 = 21 * Math.PI / 180, d = 9;
+  for (let w = 0; w < 6; w++) {
+    const c = w * Math.PI / 3;
+    const C1 = [r2, c - a2], C2 = [r2, c + a2], C3 = [r1, c + a1], C4 = [r1, c - a1];
+    const xy = ([r, a]) => [r * Math.cos(a), r * Math.sin(a)];
+    const toward = (A_, B_, t) => { const [ax, ay] = xy(A_), [bx, by] = xy(B_), L = Math.hypot(bx - ax, by - ay); return [ax + (bx - ax) * t / L, ay + (by - ay) * t / L]; };
+    const onArc = (r, a) => [r * Math.cos(a), r * Math.sin(a)];
+    const da2 = d / r2, da1 = d / r1;
+    const s1 = onArc(r2, c - a2 + da2), e1 = onArc(r2, c + a2 - da2);
+    const s2 = toward(C2, C3, d), e2 = toward(C3, C2, d);
+    const s3 = onArc(r1, c + a1 - da1), e3 = onArc(r1, c - a1 + da1);
+    const s4 = toward(C4, C1, d), e4 = toward(C1, C4, d);
+    const q = pt => xy(pt).map(f).join(' '), m = v => v.map(f).join(' ');
+    g += `<path d="M${m(s1)} A${r2} ${r2} 0 0 1 ${m(e1)} Q${q(C2)} ${m(s2)} L${m(e2)} Q${q(C3)} ${m(s3)} A${r1} ${r1} 0 0 0 ${m(e3)} Q${q(C4)} ${m(s4)} L${m(e4)} Q${q(C1)} ${m(s1)} Z" fill="none" stroke="${SEPIA}" stroke-width="2.4" stroke-linejoin="round"/>`;
+  }
+  // hub
+  g += circ(58, .6, FAINT) + circ(54.5, .6, FAINT) + circ(51, .6, FAINT);
+  g += circ(45, 2.2, RED);
+  // keyed bore (keyway at the top)
+  const rb = 23, kw = 4.2, kh = 6, ang = Math.asin(kw / rb);
+  const kx1 = -kw, kx2 = kw, ky = -Math.sqrt(rb * rb - kw * kw);
+  g += `<path d="M${f(kx2)} ${f(ky)} L${f(kx2)} ${f(-rb - kh)} L${f(kx1)} ${f(-rb - kh)} L${f(kx1)} ${f(ky)} A${rb} ${rb} 0 1 0 ${f(kx2)} ${f(ky)} Z" fill="none" stroke="${RED}" stroke-width="2"/>`;
+  // centre lines
+  g += `<path d="M-150 0 L150 0 M0 -150 L0 150" stroke="${INK}" stroke-width=".5" stroke-dasharray="12 3 2 3"/>`;
+  g += `<path d="M-130 75 L130 -75" stroke="${INK}" stroke-width=".45"/>`;
+  g += `<path d="M-7 0 L7 0 M0 -7 L0 7" stroke="${INK}" stroke-width=".9"/>`;
+  return `<g>${g}</g>`;
+})();
+let gearAt = null;                 // index the cog was last showing
+const STEP = 17;                    // degrees between projects on the rim
+let gearOpen = false;
+function placeGear(idx){
+  const g = pg.querySelector('.gear'); if (!g) return;
+  const k = gearOpen ? 2.15 : 1;                      // hover magnifies the half-gear
+  const cy = 90, R = 80 * k;
+  g.classList.toggle('open', gearOpen);
+  g.querySelector('.cog').style.transform = `scale(${k}) rotate(${-idx * STEP}deg)`;
+  g.querySelector('.notch').style.left = `${(66 * k + 4).toFixed(1)}px`;
+  g.querySelectorAll('.dial li').forEach(li => {
+    const d = +li.dataset.k - idx, th = d * STEP * Math.PI / 180;
+    const x = R * Math.cos(th), y = cy + R * Math.sin(th);
+    const sc = d === 0 ? 1.2 : Math.max(.62, 1 - .14 * Math.abs(d));
+    li.style.transform = `translate(${x.toFixed(1)}px, ${(y - 9).toFixed(1)}px) rotate(${(d * STEP).toFixed(1)}deg) scale(${sc})`;
+    li.style.setProperty('--o', Math.abs(d) > 3 ? 0 : (d === 0 ? 1 : Math.max(.3, 1 - .22 * Math.abs(d))));
+    if (Math.abs(d) > 3) li.dataset.far = ''; else delete li.dataset.far;
+  });
+}
+pg.addEventListener('mouseover', e => { if (!gearOpen && e.target.closest('.gear')) { gearOpen = true; placeGear(gearAt); } });
+pg.addEventListener('mouseout', e => { const g = e.target.closest('.gear'); if (gearOpen && g && e.target.isConnected && e.relatedTarget && !g.contains(e.relatedTarget)) { gearOpen = false; placeGear(gearAt); } });
+pg.addEventListener('focusin', e => { if (e.target.closest('.gear') && !gearOpen) { gearOpen = true; placeGear(gearAt); } });
+pg.addEventListener('focusout', e => { if (!e.target.isConnected || !e.relatedTarget) return; const g = e.target.closest('.gear'); if (g && !g.contains(e.relatedTarget)) { gearOpen = false; placeGear(gearAt); } });
+function openFolio(id, fromHash){
+  const i = PROJECTS.findIndex(p => p.id === id); if (i < 0) return;
+  const p = PROJECTS[i], prev = PROJECTS[(i + PROJECTS.length - 1) % PROJECTS.length], next = PROJECTS[(i + 1) % PROJECTS.length];
+  const secs = p.sections ? [['summary','Summary'], ...p.sections.map(x => [x[0], x[1]])] : p.minimal ? [['summary','Summary']] : [['summary','Summary'],['problem','Problem'],['build','Build'],['system','System'],
+    ...(p.testing ? [['testing', p.testing.title]] : []),['results','Results'],['lessons','Lessons']];
+  pg.innerHTML = `
+    <aside class="scroll" aria-label="Folios">
+      <div class="scroll-body">
+        <h4>FOLIOS</h4>
+        <div class="gear"><span class="veil" aria-hidden="true"></span><svg class="cog" viewBox="-150 -150 300 300" aria-hidden="true">${COG}</svg><span class="notch" aria-hidden="true"></span>
+          <ol class="dial">${PROJECTS.map(q => `<li data-k="${PROJECTS.indexOf(q)}" class="${q.id === p.id ? 'on' : ''}"><button type="button" data-go="${q.id}" aria-label="${esc(q.title)}"><span class="n">${q.no}</span><span>${esc(SHORT[q.id] || q.title)}</span></button></li>`).join('')}</ol></div>
+        <ol class="folios">${PROJECTS.map(q => `<li><button type="button" data-go="${q.id}" class="${q.id === p.id ? 'on' : ''}"><span class="n">${q.no}</span><span class="t">${esc(q.title)}</span></button></li>`).join('')}</ol>
+        <div class="secs"><h4>ON THIS FOLIO</h4>
+        <ol>${secs.map(([k, t]) => `<li><button type="button" data-jump="s-${k}"><span>${t}</span></button></li>`).join('')}</ol></div>
+        <button type="button" class="back" id="back">← BACK TO THE PAGE</button>
+      </div>
+    </aside>
+    <div class="leaf">
+    <button class="btn close" type="button" id="close">CLOSE ✕</button>
+    <div class="eyebrow">Folio ${p.no} · ${esc(p.tags)}</div>
+    <h2 id="pg-title">${esc(p.title)}</h2>
+    <div class="meta"><span>${esc(p.context)}</span></div>
+    <div class="hero-img${p.video ? ' vid' : ''}">${p.video ? `<video src="${p.video.src}" poster="${p.video.poster}" controls playsinline preload="metadata"></video>` : p.sk ? `<img class="sk" src="${p.sk}" alt="Sketch of ${esc(p.title)}" style="${p.contain?'object-fit:contain;padding:16px':''}"><img class="real" src="${p.real}" alt="${esc(p.title)}">` : p.real ? `<img src="${p.real}" alt="${esc(p.title)}">` : emptyPlate(p.title)}</div>
+    <p class="cap">${p.video ? esc(p.video.cap) : p.sk ? 'Hover the plate to reveal the photo.' : esc(p.cap || '')}</p>
+    ${block('Summary', `<p>${esc(p.note)}</p>` + (p.minimal && p.figs ? figsHTML(p.figs) : ''), 'summary')}
+    ${p.sections ? p.sections.map(x => block(esc(x[1]), x[2], x[0])).join('') : p.minimal ? '' : `
+    ${block('Problem', p.problem ? `<p>${esc(p.problem)}</p>` : todo, 'problem')}
+    ${block('Build', (p.build ? `<p>${esc(p.build)}</p>` : todo) + (p.figs ? figsHTML(p.figs) : ''), 'build')}
+    ${block('System', (p.system ? `<p>${esc(p.system)}</p>` : todo) + (p.sysFigs ? figsHTML(p.sysFigs) : ''), 'system')}
+    ${p.testing ? block(esc(p.testing.title), p.testing.html, 'testing') : ''}
+    ${block('Results', (p.nums.length ? `<div class="nums">${p.nums.map(n => `<div><b>${esc(n[0])}</b><span>${esc(n[1])}</span></div>`).join('')}</div>` : '') +
+       (p.results.length ? `<ul style="margin-top:${p.nums.length?18:0}px">${p.results.map(r => `<li>${esc(r)}</li>`).join('')}</ul>` : todo) + (p.resFigs ? figsHTML(p.resFigs) : ''), 'results')}
+    ${block('Lessons', p.lessons ? `<ul>${p.lessons.map(l => `<li>${esc(l)}</li>`).join('')}</ul>` : (p.change ? `<p>${esc(p.change)}</p>` : todo), 'lessons')}
+    `}
+    ${p.link ? block('More', `<p><a href="${p.link[1]}" target="_blank" rel="noopener">${esc(p.link[0])} ↗</a></p>`) : ''}
+    <div class="pager">
+      <button class="btn" type="button" data-go="${prev.id}">← ${prev.no}</button>
+      <button class="btn" type="button" data-go="${next.id}">${next.no} →</button>
+    </div>
+    </div>`;
+  // spin the cog from where it was to the new project
+  placeGear(gearAt === null ? i : gearAt);
+  requestAnimationFrame(() => requestAnimationFrame(() => placeGear(i)));
+  gearAt = i;
+  if (sheet.hidden) lastFocus = document.activeElement;
+  sheet.hidden = false; document.body.style.overflow = 'hidden'; pg.scrollTop = 0; pg.focus();
+  if (!fromHash && location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+}
+function closeFolio(){
+  sheet.hidden = true; document.body.style.overflow = '';
+  if (/^#p0\d$/.test(location.hash)) history.replaceState(null, '', '#projects');
+  if (lastFocus) lastFocus.focus();
+}
+sheet.addEventListener('click', e => {
+  if (e.target.closest('#close') || e.target.closest('#back')) return closeFolio();
+  const j = e.target.closest('[data-jump]');
+  if (j) { const t = document.getElementById(j.dataset.jump); if (t) t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); return; }
+  const go = e.target.closest('[data-go]'); if (go) openFolio(go.dataset.go);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sheet.hidden) closeFolio(); });
+function fromHash(){ const h = location.hash.slice(1); if (/^p0\d$/.test(h)) openFolio(h, true); }
+window.addEventListener('hashchange', fromHash); fromHash();
+
+/* ---------- timeline ---------- */
+{
+  // oldest first; at equal dates, roles come before projects
+  const items = [
+    ...ROLES.map((r, i) => ({ ...r, type:'role', ord:i })),
+    ...TL_PROJECTS.map((t, i) => ({ ...t, type:'proj', ord:i, p: PROJECTS.find(p => p.id === t.id) }))
+  ].sort((a, b) => a.at.localeCompare(b.at) || (a.type === b.type ? a.ord - b.ord : a.type === 'role' ? -1 : 1));
+  let side = 'R';
+  $('#spine').innerHTML = items.map(it => {
+    side = side === 'L' ? 'R' : 'L';   // strict alternation: every entry switches sides
+    if (it.type === 'role') {
+      return `<div class="entry ${side}">
+        <i class="dot node ${it.kind === 'r' ? 'fill' : ''}" title="${it.kind === 'r' ? 'Research & teaching' : 'Leadership'}"></i>
+        <div class="card">
+          <div class="when">${esc(it.when)}</div>
+          <h3>${esc(it.title)}</h3>
+          <div class="org">${esc(it.org)}</div>
+          <ul>${it.pts.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+        </div></div>`;
+    }
+    return `<div class="entry proj ${side}">
+      <i class="diamond node" title="Project"></i>
+      <div class="card"><button type="button" data-open="${it.id}">
+        <span class="pn">${it.p.no}</span><span class="pt">${esc(it.p.title)}</span><span class="pw">${esc(it.when)}</span>
+      </button></div></div>`;
+  }).join('');
+  $('#spine').addEventListener('click', e => { const b = e.target.closest('[data-open]'); if (b) openFolio(b.dataset.open); });
+}
+
+/* ---------- copy email ---------- */
+$('#copy').addEventListener('click', () => {
+  const t = $('#email').textContent, b = $('#copy');
+  const done = () => { b.textContent = 'COPIED'; setTimeout(() => b.textContent = 'COPY', 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done).catch(sel); else sel();
+  function sel(){ const r = document.createRange(); r.selectNodeContents($('#email')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+});
+</script>
+
+</body>
+</html>
